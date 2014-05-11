@@ -1,0 +1,72 @@
+@font-face
+{
+	font-family: Socialico;
+	src: url('../assets/Socialico.otf') format("opentype");
+}
+
+body{
+  background-color: #f57c21;
+  text-align: center;
+  shape-rendering: crispEdges;
+}
+
+#parent {
+  width:100%;
+  min-height:300px;
+  
+  /* Firefox */
+  display:-moz-box;
+  -moz-box-orient:horizontal;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+  
+  /* Safari and Chrome */
+  display:-webkit-box;
+  -webkit-box-orient:horizontal;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  
+  /* W3C */
+  display:box;
+  box-orient:horizontal;
+  box-pack:center;
+  box-align:center;
+}
+
+#child{
+  display: inline-block;
+  
+  font-family: 'Open Sans', 'Helvetica', sans-serif;
+  color: #fff;
+  width: 500px;
+  height: 250px;
+  text-align: left;
+  background-color: transparent;
+}
+
+.white {
+  fill: #fff;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.39);
+  shape-rendering: crispEdges;
+}
+
+#icons {
+  cursor: pointer;
+  shape-rendering: crispEdges;
+}
+
+#info {
+  opacity: .45;
+  color: #1a1a19;
+  fill: #1a1a19;
+  font-family: "Open Sans", "Helvetica", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  shape-rendering: crispEdges;
+}
+
+#info:hover{
+  opacity: .20;
+  fill: #1a1a19;
+}

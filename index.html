@@ -1,8 +1,108 @@
+
+<!DOCTYPE HTML>
 <html>
 <head>
-  <title>Hi.</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="description" content="I'm a student at UC Berkeley. This is a home for my stuff.">
+  <meta name="author" content="Anthony Sutardja">
+  <meta name="viewport" content="width=device-width">
+  <title>Anthony Sutardja's Abode</title>
+  <!-- External font -->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/normalize.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" charset="utf-8">
+  
 </head>
 <body>
-  <h1>Hi, come back soon :)</h1>
+  <!-- Main content here -->
+  <div id="parent">
+    <div id="child"></div>
+  </div>
+
+  <!-- JavaScript files -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    $("#parent").height($(window).height());
+    //need event handler for window height resize
+    Icons = {
+      'forward' : function(d){
+        window.location = d.url;
+      },
+      'changeBG' : function(d){
+        d3.select("body").transition()
+          .style("background-color", d.color);
+      },
+      'resetBG' : function(d){
+        d3.select("body").transition()
+          .style("background-color", "#f57c21");
+      }
+    };
+    // Data Entries
+    var iconData = [
+      {letter:"g", color:"#305d8a", url:"http://github.com/anthonysutardja"},
+      {letter:"i", color:"#0073b2", url:"http://www.linkedin.com/in/anthonysutardja"},
+      {letter:"o", color:"#2c4762", url:"http://bl.anthonysutardja.com/"},
+      {letter:"f", color:"#3b5998", url:"http://www.facebook.com/anthonysutardja"},
+      {letter:"l", color:"#00a5d8", url:"http://twitter.com/anthonysutardja"} 
+    ];
+    
+    // After load ...
+    $(document).ready(function(){
+      // Render vis
+      var canv = d3.select("#child").append("svg:svg")
+          .attr("width", "500px")
+          .attr("height", "250px")
+          .attr("id", "canv");
+      
+      // Intro text
+      var intro = canv.append("text")
+          .attr('x', '250px')
+          .attr('y', '75px')
+          .attr('text-anchor', 'middle')
+          .attr('class', 'white')
+          .style('font-size', '28px')
+          .style('font-weight', '700')
+          .style('font-family', 'Open Sans')
+          .text("Hi, I'm Anthony.");
+          
+      // Subline
+      var link = canv.append("text")
+          .attr('x', '250px')
+          .attr('y', '125px')
+          .attr('text-anchor', 'middle')
+          .attr('id', 'info')
+          .text("Check out my blog.")
+          .attr('opacity', 0)
+          .on('click', function(){ window.location = "http://bl.anthonysutardja.com";})
+          .transition().ease('bounce').duration(1000)
+            .attr('transform', function(){return 'translate(0, 25)';})
+            .attr('opacity', .45);
+      
+      // Icons
+      var icons = canv.selectAll('#icons').data(iconData);
+      
+      icons.enter().append("text")
+          .attr('x', '250px')
+          .attr('y', '125px')
+          .attr('text-anchor', 'middle')
+          .attr('class', 'white')
+          .style('font-family', 'Socialico')
+          .style('font-size', '38px')
+          .attr('id', 'icons')
+          .text(function(d){return d.letter;})
+          .on("click", Icons.forward)
+          .on("mouseover", Icons.changeBG)
+          .on("mouseout", Icons.resetBG)
+          .transition()
+            .attr('transform', function(d,i){return 'translate('+(i-2)*50+',0)';})
+            .ease('elastic')
+            .duration(2250);
+      
+      
+    });
+  </script>
 </body>
 </html>
