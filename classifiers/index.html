@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	  	<meta charset="utf-8">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	  	<title>Classifiers 101</title>
+	  	<meta name="description" content="Just enough to get you started." />
+
+	  	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
+	  	<link rel="stylesheet" href="styles/main.css">
+      <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+      <script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      </script>
+	</head>
+	<body>
+		<article id="presentation">
+	  	
+	    	<section  ><h2><strong>Classifers</strong> 101</h2>
+
+<h3><a href="https://twitter.com/anthonysutardja">@anthonysutardja</a></h3>
+<img src="https://en.gravatar.com/userimage/34463891/55fac5fb5797d80975aab7680ae417f1.jpg?size=200" class="avatar avatar--small" />
+</section>
+	  	
+	    	<section  ><h3>the goal of <strong>classification</strong> is to learn a mapping from the set of inputs $x$ to the set of outputs $y$</h3></section>
+	  	
+	    	<section  ><h2>Example uses:</h2>
+<ul>
+<li>email spam</li>
+<li>handwriting digit classification</li>
+<li>detecting fraud</li>
+<li>classifying flowers</li>
+<li>etc.</li>
+</ul></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h3>the goal of <strong>this presentation</strong> is to cover the basics of some common classifiers to help get you started</h3></section>
+	  	
+	    	<section  ><h2>Handy <code>python</code> tools:</h2>
+<ul>
+<li><a href="http://www.numpy.org/"><code>numpy</code></a> and <a href="http://www.scipy.org/"><code>scipy</code></a></li>
+<li><a href="http://matplotlib.org/"><code>matplotlib</code></a> or <a href="https://github.com/olgabot/prettyplotlib"><code>prettyplotlib</code></a></li>
+<li><strong><a href="http://scikit-learn.org/stable/"><code>sklearn</code></a></strong></li>
+<li>Also, <a href="http://image.diku.dk/shark/sphinx_pages/build/html/index.html">Shark</a> for <code>C++</code> and <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a> for Java users.</li>
+<li><em>(And <a href="https://spark.apache.org/docs/0.9.0/mllib-guide.html">Spark</a> for really large data sets.. more later)</em></li>
+</ul></section>
+	  	
+	  	</article>
+
+	  	<script src="scripts/main.js"></script>
+
+	  	<script>bespoke.from('#presentation', { bullets: "li, .bullet", hash: true, keys: true, fullscreen: true, progress: true, scale: true, state: true, touch: true });</script>
+	</body>
+</html>
