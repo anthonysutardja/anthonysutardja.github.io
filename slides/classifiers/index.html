@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	  	<meta charset="utf-8">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	  	<title>Classifiers 101</title>
+	  	<meta name="description" content="Just enough to get you started." />
+
+	  	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
+	  	<link rel="stylesheet" href="styles/main.css">
+      <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+      </script>
+      <script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+      </script>
+	</head>
+	<body>
+		<article id="presentation">
+	  	
+	    	<section  ><h2><strong>Classifers</strong> 101</h2>
+
+<h3><a href="https://twitter.com/anthonysutardja">@anthonysutardja</a></h3>
+<img src="https://en.gravatar.com/userimage/34463891/72ba505a655bbfeb8bb6011422c0f915.jpg?size=200" class="avatar avatar--small" />
+</section>
+	  	
+	    	<section  ><h3>the goal of <strong>classification</strong> is to learn a mapping from the set of inputs $x$ to the set of outputs $y$</h3></section>
+	  	
+	    	<section  ><h2>Example uses:</h2>
+<ul>
+<li>email spam</li>
+<li>detecting fraud</li>
+<li>unusual server logs</li>
+<li>handwriting digit classification</li>
+<li>classifying flowers</li>
+<li>etc.</li>
+</ul></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h3>the goal of <strong>this presentation</strong> is to cover the basics of some common classifiers to help get you started</h3></section>
+	  	
+	    	<section  ><h1>Getting Started</h1></section>
+	  	
+	    	<section  ><h2>Handy <code>python</code> tools:</h2>
+<ul>
+<li><a href="http://www.numpy.org/"><code>numpy</code></a> and <a href="http://www.scipy.org/"><code>scipy</code></a></li>
+<li><a href="http://matplotlib.org/"><code>matplotlib</code></a> or <a href="https://github.com/olgabot/prettyplotlib"><code>prettyplotlib</code></a></li>
+<li><strong><a href="http://scikit-learn.org/stable/"><code>sklearn</code></a></strong></li>
+<li>Also, <a href="http://image.diku.dk/shark/sphinx_pages/build/html/index.html">Shark</a> for <code>C++</code> and <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a> for Java users.</li>
+<li><em>(And <a href="https://spark.apache.org/docs/0.9.0/mllib-guide.html">Spark</a> for really large data sets.. more later)</em></li>
+</ul></section>
+	  	
+	    	<section  ><h2>The routine:</h2>
+<ul>
+  <li>1) Split dataset into training and holdout</li>
+  <li>2) Choose a classifier</li>
+  <li>
+  <div style='width: 30%; margin: auto;'>
+    <ul style='text-align: left;'>
+      <li><small>2a) Tune parameters</small></li>
+      <li><small>2b) Cross validate</small></li>
+      <li><small>2c) Repeat</small></li>
+      <li><small>2d) Repeat</small></li>
+      <li><small>2e) Repeat</small></li>
+      <li><small>...</small></li>
+    </ul>
+  </div>
+  </li>
+</ul>
+</section>
+	  	
+	    	<section  ><h1>But which classifier?</h1></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>$k$-NN</h2>
+<p>$k$ Nearest Neighbors</p>
+</section>
+	  	
+	    	<section  ><h3>A type of instance-based learning (lazy learning)</h3>
+</section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.05); padding: 35px; border-radius: 0.5em;">
+  <img width="400px" height="300px" src="../imgs/plot_classification_001.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.neighbors import KNeighborsClassifier
+clf = KNeighborsClassifier(
+    n_neighbors=3,
+    weights='uniform',
+    algorithm='KDTree',
+)
+
+# Train the classifier
+clf.fit(X_train, y_train)
+
+# Use it to predict
+clf.predict(X_test)</code></pre>
+</section>
+	  	
+	    	<section  ><ul>
+<li>different <strong>distance metrics</strong> <em>(minkowski: $\big(\sum \left|x - y\right|^{p}\big)^{\frac{1}{p}}$)</em></li>
+<li>different <strong>voting schemes</strong> <em>(uniform, distance, etc.)</em></li>
+</ul></section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>Pros</h2>
+</li>
+<li>Easy and just works!</li>
+<li>
+<p>No training really required</p>
+</li>
+<li>
+<h2>Cons</h2>
+</li>
+<li>Needs <strong>a lot</strong> of data</li>
+<li>Evaluation can be slow</li>
+<li>Performs poorly in high dimensions</li>
+<li>Brute force: $O(d n)$, KDTree: $O(d \log(n))$</li>
+</ul></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>Decision Trees</h2></section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.05); padding: 35px; border-radius: 0.5em;">
+  <img width="696px" height="320px" src="../imgs/dtree.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><h2>How the tree is built</h2>
+<ul>
+<li></li>
+<li>choose the <strong>best attribute</strong> to split on</li>
+<li>separate data based on split chosen</li>
+<li>recurse on each subset of data</li>
+<li>return leaf node when all subset is one class</li>
+</ul></section>
+	  	
+	    	<section  ><h2>What's the best attribute?</h2>
+<ul>
+<li></li>
+<li>one step look-ahead</li>
+<li>maximize information gain</li>
+<li>minimize gini impurity</li>
+</ul></section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier(
+    criterion='entropy',
+    max_depth=50,
+    min_samples_split=2,
+    min_samples_leaf=5,
+)
+
+# Train the classifier -- can take a while
+clf.fit(X_train, y_train)
+
+# Use it to predict
+clf.predict(X_test)</code></pre>
+</section>
+	  	
+	    	<section  ><h2>easily overfits</h2>
+<ul>
+<li></li>
+<li>avoid by stop growing tree earlier</li>
+<li>avoid with error pruning</li>
+</ul></section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>Pros</h2>
+</li>
+<li>fast evaluation $O(\log n)$</li>
+<li>easy to train</li>
+<li>
+<p>multiclassification is easy</p>
+</li>
+<li>
+<h2>Cons</h2>
+</li>
+<li>performs poorly with large dimensional data</li>
+<li>performs poorly if not axis-aligned</li>
+<li>easily overfits to training data</li>
+<li>biased if one class dominates dataset</li>
+<li><code>sklearn</code> doesn't implement pruning</li>
+</ul></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>Random Forest</h2></section>
+	  	
+	    	<section  ><blockquote>
+<p><strong>“The Wisdom of Crowds”</strong> - <em>Sir Francis Galton</em></p>
+</blockquote>
+<p>(i.e. many idiots are better than one)</p></section>
+	  	
+	    	<section  ><p>use a bunch of weak decision trees to make a generalized forest</p></section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.05); padding: 35px; border-radius: 0.5em;">
+  <img height="300px" src="../imgs/forest.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(
+    n_estimators=20,      # number of dtrees
+    criterion='entropy',  # same params as dtree
+    max_depth=25,
+    min_samples_split=10
+    min_samples_leaf=5,
+    n_jobs = 4,           # for parallel execution
+)
+
+clf.fit(X_train, y_train) # will take a long time
+clf.predict(X_test)</code></pre>
+</section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>Pros</h2>
+</li>
+<li>Generalizes well</li>
+<li>Better accuracy on unseen data</li>
+<li>
+<p>Easy to parallelize training &amp; evaluation</p>
+</li>
+<li>
+<h2>Cons</h2>
+</li>
+<li>Takes a while to train</li>
+<li>Can perform poorly to skewed data</li>
+</ul></section>
+	  	
+	    	<section  ><h2>SVM</h2>
+<p><i>Support Vector Machines</i></p>
+</section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.25); padding: 35px; border-radius: 0.5em;">
+  <img width="275px" height="300px" src="http://upload.wikimedia.org/wikipedia/commons/2/2a/Svm_max_sep_hyperplane_with_margin.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><h3>$\text{argmin}_{{\bf w}, \xi, b} \big( \frac{1}{2} \| {\bf w} \|^2 + C \sum_{i=1}^{n} \xi_{i} \big)$</h3>
+</section>
+	  	
+	    	<section  ><pre class="language-python"><code>from sklearn import svm
+clf = svm.SVC(kernel='rbf', C=1.0)
+
+# Train the classifier
+clf.fit(X_train, y_train)
+
+# Use to predict
+clf.predict(X_test)</code></pre>
+</section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>Pros</h2>
+</li>
+<li>performs great in high dimensions</li>
+<li>
+<p>still works well when number of samples greater than number of dimensions</p>
+</li>
+<li>
+<h2>Cons</h2>
+</li>
+<li>poor performance if number of samples much greater than number of dimensions</li>
+</ul></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>LR</h2>
+<p>Logistic Regression</p></section>
+	  	
+	    	<section  ><p>a probabilistic approach to classification</p></section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.05); padding: 35px; border-radius: 0.5em;">
+  <img height="320px" src="../imgs/logistic.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><p>decision boundary: ${\bf w} {\bf x} + b$</p></section>
+	  	
+	    	<section  ><h3>modeled probability</h3>
+<p>$Pr(Y = 1 \big| x) = \frac{1}{1 + e^{-(wx + b)}}$</p></section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.25); padding: 35px; border-radius: 0.5em;">
+  <img height="250px" src="../imgs/sigmoid.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>How is the model trained?</h2>
+</li>
+<li>maximum likelihood estimation</li>
+<li>cannot actually solve</li>
+<li>approximate with <strong>gradient descent</strong></li>
+</ul></section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.linear_model import LogisticRegression
+# Uses LIBLINEAR C Library
+clf = LogisticRegression(
+    penalty='l2',
+    C=1.0,
+)
+
+clf.fit(X_train, y_train)
+clf.predict(X_test)</code></pre>
+</section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.linear_model import SGDClassifier
+# Alternative
+clf = SGDClassifier(
+    penalty='l2',
+    loss='log',
+)
+
+clf.fit(X_train, y_train)
+clf.predict(X_test)</code></pre>
+</section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>Pros</h2>
+</li>
+<li>great for high dimensional data</li>
+<li>relatively simple</li>
+<li>not prone to overfitting (from regularization)</li>
+<li>
+<h2>Cons</h2>
+</li>
+<li>Only useful for linear decision boundaries</li>
+</ul></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><ul>
+<li>
+<h2>There are more.. but they're complicated</h2>
+</li>
+<li>Linear/Quadratic Discriminant Analysis</li>
+<li>Neural Networks</li>
+</ul></section>
+	  	
+	    	<section  ><h2><strong>But how do I find the right parameters?</strong></h2></section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>Cross validation and Repetition</h2></section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.05); padding: 35px; border-radius: 0.5em;">
+  <img height="100px" src="../imgs/crossval.jpg"/>
+</div>
+</section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.cross_validation import cross_val_score
+from sklearn import svm
+clf = svm.SVC(kernel='rbf')
+
+# Cross validate across 5 buckets
+scores = cross_val_score(clf, X_train, y_train,
+                         cv=5, fit_params={'C': 2.0})
+</code></pre>
+</section>
+	  	
+	    	<section  ><pre class="language-python">
+<code>from sklearn.grid_search import GridSearchCV
+from sklearn import svm
+
+c_vals = 10 ** np.arange(-5, 5)  # 10^-5, 10^-4, ... , 10^5
+clf = GridSearchCV(
+    estimator=svm.SVC(kernel='rbf'),  # plug-in any estimator
+    param_grid=dict(C=c_vals),        # add your param ranges
+    cv=5,  # number of buckets for cross validation
+)
+
+clf.fit(X_train, y_train)    # find optimal params
+clf.score(X_train, y_train)  # to see how well it does
+p = clf.best_params_         # get optimal params
+</code></pre>
+</section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>A quick dabble into feature extraction</h2></section>
+	  	
+	    	<section  ><ul>
+<li>
+<h2>need a set of discrete and/or continuous numbers</h2>
+</li>
+<li><strong>images</strong>: pixel values</li>
+<li><strong>categorical</strong>: count</li>
+<li><strong>text</strong>: bag of words, n-grams (<a href="http://textblob.readthedocs.org/en/dev/">textblob</a>)</li>
+</ul></section>
+	  	
+	    	<section  ><h2>getting it right is hard</h2></section>
+	  	
+	    	<section  ><p>feature transformation to higher dimensions</p>
+<p>$(x, y) \rightarrow (x, y, xy, x^2, y^2)$</p></section>
+	  	
+	    	<section  ><p>projection of features into lower dimensions</p>
+<p>$(a, b, c, d, e, f) \rightarrow (a, f)$</p></section>
+	  	
+	    	<section  ><h2>often done with principal component analysis (PCA)</h2>
+<pre class='language-python'><code>from sklearn.decomposition import PCA
+decomp = PCA(n_components=2)
+decomp.fit(X)
+
+new_X = decomp.transform(X)
+</code></pre>
+</section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>Some architecture stuff</h2></section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.95); padding: 35px; border-radius: 0.5em;">
+  <img height="250px" src="../imgs/scoring.png"/>
+</div>
+</section>
+	  	
+	    	<section  ><div style="background-color: rgba(255,255,255,0.95); padding: 35px; border-radius: 0.5em;">
+  <img height="50px" src="../imgs/spark-logo.png"/>
+</div>
+</section>
+	  	
+	    	<section data-bespoke-state="green" class="light"><h2>Thanks for listening!</h2></section>
+	  	
+	    	<section  ><ul>
+  <li>References</li>
+  <li><small style='font-size: 5px;'><a href="http://scikit-learn.org/stable/modules/neighbors.html">http://scikit-learn.org/stable/modules/neighbors.html</a></small></li>
+  <li><small style='font-size: 5px;'><a href="http://scikit-learn.org/stable/modules/tree.html">http://scikit-learn.org/stable/modules/tree.html</a></small></li>
+  <li><small style='font-size: 5px;'><a href="http://scikit-learn.org/stable/modules/ensemble.html">http://scikit-learn.org/stable/modules/ensemble.html</a></small></li>
+  <li><small style='font-size: 5px;'><a href="http://scikit-learn.org/stable/modules/svm.html">http://scikit-learn.org/stable/modules/svm.html</a></small></li>
+  <li><small style='font-size: 5px;'><a href="http://scikit-learn.org/stable/modules/cross_validation.html">http://scikit-learn.org/stable/modules/cross_validation.html</a></small></li>
+  <li><small style='font-size: 5px;'><a href="http://nerds.airbnb.com/architecting-machine-learning-system-risk/">http://nerds.airbnb.com/architecting-machine-learning-system-risk/</a></small></li>
+</ul>
+</section>
+	  	
+	  	</article>
+
+	  	<script src="scripts/main.js"></script>
+
+	  	<script>bespoke.from('#presentation', { bullets: "li, .bullet", hash: true, keys: true, fullscreen: true, progress: true, scale: true, state: true, touch: true });</script>
+	</body>
+</html>
