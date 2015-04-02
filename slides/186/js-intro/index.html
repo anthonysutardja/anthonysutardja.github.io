@@ -423,7 +423,7 @@ console.log(func(2));  // 4
             <p>When using frameworks, all sorts of crazy magic is happening and you don’t have any way of knowing about it. <strong>You need to be careful regarding what <code>this</code> is.</strong> If you’re interested, you can read more about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"><code>this</code></a> on your own time.</p>
         </section>
         <section >
-            <h3 id="classic-work-arounds-use-bind">Classic work arounds: use bind</h3>
+            <h3 id="to-ensure-youre-getting-the-right-this-use-bind">To ensure you’re getting the right <code>this</code>: use <code>bind</code></h3>
 <pre><code class="language-javascript">var Person = function (firstName) {
     this.firstName = firstName;
 };
@@ -441,7 +441,7 @@ setTimeout(1000, b.getName.bind(b));  // guarantee binding to `b`
         </section>
         <section >
             <h3 id="another-hack">Another hack</h3>
-<p>Rebound methods still have the same scope… let’s use <strong>that</strong>.</p>
+<p>Methods defined within a function no longer have access to <code>this</code>, but these functions still have access to the scope in which they were defined… let’s use <strong>that</strong>.</p>
 
 <pre><code class="language-javascript">var Person = function (firstName) {
     this.firstName = firstName;
