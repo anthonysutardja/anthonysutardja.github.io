@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="robots" content="index, follow, archive" />
+    <meta name="referrer" content="always" />
+
+    <!-- Content -->
+    <meta name="description" property="description"
+          content="Introduction to JavaScript" />
+    <meta name="author" content="Anthony Sutardja" />
+
+    <title>CS186 JS Workshop</title>
+
+    <!-- Includes -->
+        <!-- Javascripts -->
+<script type="text/javascript"
+        src="includes/katex/build/katex/katex.min.js"></script>
+
+<!-- Stylesheets -->
+<link media="all" rel="stylesheet" type="text/css"
+      href="includes/katex/build/katex/katex.min.css" />
+
+<!-- Configure -->
+<script>var readyStateCheckInterval=setInterval(function(){if(document.readyState==="complete"){var e=document.getElementsByClassName("equation");Array.prototype.forEach.call(e,function(e){katex.render("\\displaystyle{"+e.getAttribute("data-expr")+"}",e)});clearInterval(readyStateCheckInterval)}},10)</script>
+        <!-- Javascripts -->
+<script type="text/javascript"
+        src="includes/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript"
+        src="includes/d3/d3.min.js"></script>
+<script type="text/javascript"
+        src="includes/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="includes/metrics-graphics/js/metricsgraphics.min.js"></script>
+
+<!-- Stylesheets -->
+<link media="all" rel="stylesheet" type="text/css"
+      href="includes/bootstrap/dist/css/bootstrap.css" />
+<link media="all" rel="stylesheet" type="text/css"
+      href="includes/metrics-graphics/css/metricsgraphics.css" />
+<link media="all" rel="stylesheet" type="text/css"
+      href="includes/metrics-graphics/css/metricsgraphics-demo.css" />
+        <!-- Javascripts -->
+<script type="text/javascript"
+        src="includes/prism/prism.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-bash.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-c.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-css.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-go.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-java.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-javascript.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-markup.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-perl.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-php.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-python.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-ruby.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-scala.min.js"></script>
+<script type="text/javascript"
+        src="includes/prism/components/prism-sql.min.js"></script>
+
+<!-- Stylesheets -->
+<link media="all" rel="stylesheet" type="text/css"
+      href="includes/prism/themes/prism-okaidia.css" />
+</head>
+<body>
+    <article id="presentation">
+        <section >
+            <h1 id="cs186-intro-to-javascript">CS186 Intro to JavaScript</h1>
+<p>With <a href="http://anthony.land">Anthony Sutardja</a></p>
+        </section>
+        <section >
+            <p>This is a brief tutorial on how to get started in JavaScript.</p>
+
+<p><strong>We’ll be covering basic syntax and common patterns.</strong></p>
+        </section>
+        <section >
+            <h2 id="whats-a-web-page">What’s a web page?</h2>
+
+<p>A web page is a <a href="http://en.wikipedia.org/wiki/HTML">HTML document</a>. These documents can contain JavaScript (abbreviated JS).</p>
+
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;Hi there.&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Rick Grimes&lt;/h1&gt;
+        &lt;!-- JavaScript block loaded through some file --&gt;
+        &lt;script src="static/js/app.js"&gt;&lt;/script&gt;
+        &lt;!-- JavaScript evaluated while rendering the page --&gt;
+        &lt;script&gt;
+            var rick = 'police man';
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        </section>
+        <section >
+            <p>Can access <a href="https://developer.chrome.com/devtools">Chrome’s Developer Tools</a> via <code>⌘ + ⌥ + J</code> in OSX<br />
+(or <code>ctrl + ⇧ + J</code> elsewhere)</p>
+        </section>
+        <section >
+            <h2 id="multiple-ways-to-debug">Multiple ways to debug</h2>
+<ol>
+  <li><code>debugger</code> keyword</li>
+  <li><code>console.log</code> function</li>
+  <li>Browser’s web developer tools</li>
+</ol>
+        </section>
+        <section >
+            <pre><code class="language-javascript">// Console.log example
+var findZombies = function (data) {
+    console.log(data);
+    // Do some stuff to find zombies
+};
+
+// Pretend we didn't know what was being passed into this function
+findZombies([1,2,3]);
+</code></pre>
+
+<script>
+// Console.log example
+var findZombies = function (data) {
+    console.log(data);
+};
+
+findZombies([1,2,3]);
+
+</script>
+        </section>
+        <section >
+            <h1 id="questions-on-debugging">Questions on debugging?</h1>
+<p>(Before we dive into syntax)</p>
+        </section>
+        <section >
+            <h1 id="javascript-syntax">JavaScript Syntax</h1>
+<p>JS syntax is extremely forgiving, which means debugging is a pain.</p>
+        </section>
+        <section >
+            <h2 id="js-is-loosely-typed-sorry">JS is loosely typed (sorry).</h2>
+
+<pre><code class="language-javascript">var name = 'Rick Grimes';
+var zombiesKilled = 9000;
+var findZombies = function(locations) { return []; };
+</code></pre>
+        </section>
+        <section >
+            <h3 id="keywords-that-you-shouldt-use-to-name-variables">Keywords that you should’t use to name variables</h3>
+
+<pre><code>abstract, boolean, break, byte, case, catch,
+char, class, const, continue, debugger, default,
+delete, do, double, else, enum, export, extends,
+false, final, finally, float, for, function,
+goto, if, implements, import, in, instanceof,
+int, interface, long, native, new, null, package,
+private, protected, public, return, short, static,
+super, switch, synchronized, this, throw, throws,
+transient, true, try, typeof, var, volatile, void,
+while, with
+</code></pre>
+
+<p>But most of these aren’t implemented in JS… <small>(will work in chrome but don’t do it!)</small></p>
+        </section>
+        <section >
+            <h2 id="js-basic-types">JS basic types</h2>
+<pre><code class="language-javascript">var a = 1;                // number
+var b = 1e+10;            // number
+var c = 1.01;             // number
+var d = true;             // boolean
+var d = 'hi';             // string
+var e = {'state': 'CA'};  // object literal
+var f = function() {};    // function object
+</code></pre>
+
+<p>And there are others but they are just objects.. (like Array)</p>
+        </section>
+        <section >
+            <h3 id="convert-string-to-number">Convert string to number</h3>
+
+<pre><code class="language-javascript">var strNum = '123';
+var converted = +strNum;  // 123
+</code></pre>
+        </section>
+        <section >
+            <h3 id="convert-number-to-string">Convert number to string</h3>
+
+<pre><code class="language-javascript">var num = 123;
+var converted = '' + num;  // '123'
+</code></pre>
+        </section>
+        <section >
+            <h3 id="convert-object-to-boolean">Convert object to boolean</h3>
+
+<pre><code class="language-javascript">var obj = {};
+var converted = !!obj;  // true
+</code></pre>
+        </section>
+        <section >
+            <h2 id="objects">Objects</h2>
+<p>Are just basically hash maps.</p>
+
+<pre><code class="language-javascript">var obj = {
+    'name': 'Rick Grimes',
+    'occupation': 'Police man'
+};
+</code></pre>
+        </section>
+        <section >
+            <p>You can get/set attributes in two ways:</p>
+
+<pre><code class="language-javascript">obj.name = 'Karl';
+obj['name'] = 'Karl';
+
+console.log(obj.name);    // 'Karl'
+console.log(obj['name']);  // 'Karl'
+</code></pre>
+        </section>
+        <section >
+            <h2 id="equality">Equality</h2>
+
+<p>Always use strict equality <code>===</code> rather than just the regular equality <code>==</code></p>
+
+<pre><code class="language-javascript">console.log(1 == 1);  // true
+console.log(1 === 1);  // true
+
+console.log(1 == [1]);  // true
+console.log(1 === [1]);  // false
+
+console.log(0 == []);  // true
+console.log(0 === []);  // false
+</code></pre>
+        </section>
+        <section >
+            <h2 id="functions">Functions</h2>
+
+<pre><code class="language-javascript">function fcnName(parameter1, parameter2) {
+    // Local scope
+    var x = 1;  // accessible only to scope
+    // do something
+    return true;
+};
+</code></pre>
+        </section>
+        <section >
+            <p>Functions don’t need to have names</p>
+
+<pre><code class="language-javascript">function (parameter1, parameter2) {
+    // Local scope
+    var x = 1;  // accessible only to scope
+    // do something
+    return true;
+};
+</code></pre>
+        </section>
+        <section >
+            <p>Functions don’t need to have names, but can be assigned to a variable.</p>
+
+<p>Anthony likes this way because it doesn’t do crazy things.</p>
+
+<pre><code class="language-javascript">var fcnName = function (parameter1, parameter2) {
+    // Local scope
+    var x = 1;  // accessible only to scope
+    // do something
+    return true;
+};
+</code></pre>
+        </section>
+        <section >
+            <p>Functions don’t have to return anything (returns <code>undefined</code> by default)</p>
+
+<pre><code class="language-javascript">function noOp() {};
+console.log(noOp());  // undefined
+</code></pre>
+        </section>
+        <section >
+            <h2 id="js-doesnt-have-any-classes-but-it-kind-of-does">JS doesn’t have any classes, but it kind of does</h2>
+
+<pre><code class="language-javascript">var Person = function (firstName) {
+    // You can use the `this` keyword
+    this.firstName = firstName;
+};
+
+var bob = new Person('Bob');
+console.log(bob.firstName);  // 'Bob'
+</code></pre>
+        </section>
+        <section >
+            <p>Adding class methods requires you to dive into the object’s <code>prototype</code>.</p>
+
+<pre><code class="language-javascript">var Person = function (firstName) {
+    this.firstName = firstName;
+};
+
+Person.prototype.setName = function (firstName) {
+    // You can use the `this` keyword
+    this.firstName = firstName;
+};
+
+var p = new Person('Bob');
+console.log(p.firstName);  // 'Bob'
+p.setName('Joe');
+console.log(p.firstName);  // 'Joe'
+</code></pre>
+        </section>
+        <section >
+            <h3 id="inhertiance-forget-about-it">Inhertiance? Forget about it.</h3>
+<p>Unless you really want to, there are a <a href="http://davidshariff.com/blog/javascript-inheritance-patterns/">bunch</a> of JavaScript patterns that will allow you to mimic some sort of class inhertiance behavior.</p>
+        </section>
+        <section >
+            <h1 id="the-awful-parts-of-javascript">The awful parts of JavaScript</h1>
+        </section>
+        <section >
+            <h2 id="this-is-the-worst"><code>this</code> is the worst</h2>
+        </section>
+        <section >
+            <p>In the global browser context, <code>this</code> refers to the global context</p>
+
+<pre><code class="language-javascript">// in your Browser's JS console
+console.log(this === window);  // true
+</code></pre>
+        </section>
+        <section >
+            <h3 id="in-a-function-it-depends">In a function? It depends..</h3>
+
+<pre><code class="language-javascript">var foo = function() {
+    return this;
+};
+
+/** some code in between **/
+
+// should be the global object
+console.log(foo());
+// but not necessarily..
+</code></pre>
+        </section>
+        <section >
+            <p>Things get complicated in callbacks</p>
+
+<pre><code class="language-javascript">var f = function () {
+    // Run anonymous function 
+    setTimeout(100, function () {console.log(this);})
+};
+
+f();  // 100 ms later --&gt; "undefined" is logged
+</code></pre>
+        </section>
+        <section >
+            <h3 id="its-straight-forward-in-classes-right">It’s straight forward in “classes” right?</h3>
+<pre><code class="language-javascript">var Incrementer = function () {
+    this.inc = 1;
+};
+
+Incrementer.prototype.increment = function(number) {
+    return this.inc + number;
+};
+
+var i = new Incrementer();
+console.log(i.increment(2));  // 3
+</code></pre>
+        </section>
+        <section >
+            <h3 id="nope-special-js-methods-can-change-what-this-is"><strong>Nope.</strong> Special JS methods can change what <code>this</code> is</h3>
+
+<pre><code class="language-javascript">var Incrementer = function () {
+    this.inc = 1;
+};
+
+Incrementer.prototype.increment = function(number) {
+    return this.inc + number;
+};
+
+var i = new Incrementer();
+console.log(i.increment(2));  // 3
+
+var obj = {'inc': 2};
+
+// Binds `this` to `obj` one time
+console.log(i.increment.call(obj, 2));  // 4
+// Binds `this` to `obj` one time
+console.log(i.increment.apply(obj, [2]));  // 4
+</code></pre>
+        </section>
+        <section >
+            <h3 id="and-another-way">And another way…</h3>
+
+<pre><code class="language-javascript">var Incrementer = function () {
+    this.inc = 1;
+};
+
+Incrementer.prototype.increment = function(number) {
+    return this.inc + number;
+};
+
+var i = new Incrementer();
+console.log(i.increment(2));  // 3
+
+var obj = {'inc': 2};
+
+// Binds `this` to `obj` in a new function with the same scoping as the original function
+var func = i.increment.bind(obj);
+console.log(func(2));  // 4
+</code></pre>
+        </section>
+        <section >
+            <p>When using frameworks, all sorts of crazy magic is happening and you don’t have any way of knowing about it. <strong>You need to be careful regarding what <code>this</code> is.</strong> If you’re interested, you can read more about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"><code>this</code></a> on your own time.</p>
+        </section>
+        <section >
+            <h3 id="classic-work-arounds-use-bind">Classic work arounds: use bind</h3>
+<pre><code class="language-javascript">var Person = function (firstName) {
+    this.firstName = firstName;
+};
+
+Person.prototype.getName = function () {
+    return this.firstName;
+}
+
+var b = new Person('Bob');
+
+/** bunch of code that does something mysterious **/
+
+setTimeout(1000, b.getName.bind(b));  // guarantee binding to `b`
+</code></pre>
+        </section>
+        <section >
+            <h3 id="another-hack">Another hack</h3>
+<p>Rebound methods still have the same scope… let’s use <strong>that</strong>.</p>
+
+<pre><code class="language-javascript">var Person = function (firstName) {
+    this.firstName = firstName;
+};
+
+Person.prototype.delayedShout = function () {
+    var that = this;
+    setTimeout(1000, function() {
+        console.log(that.name);
+    });
+}
+
+/** bunch of code that does something mysterious things in 1 second **/
+</code></pre>
+        </section>
+        <section >
+            <h1 id="other-awful-parts-of-javascript">Other awful parts of JavaScript</h1>
+        </section>
+        <section >
+            <h2 id="what-is-a-after-execution">What is <code>a</code> after execution?</h2>
+
+<pre><code class="language-javascript">var a = 10;
+
+function b() {
+    a = 100;
+    if (true) {
+        return;
+    } else {
+        var a = 1000;
+    }
+};
+
+b()
+console.log(a);
+</code></pre>
+        </section>
+        <section >
+            <h2 id="a-is-obviously-still-10"><code>a</code> is <strong><em>obviously</em></strong> still 10</h2>
+<pre><code class="language-javascript">var a = 10;
+
+function b() {
+    a = 100;
+    if (true) {
+        return;
+    } else {
+        var a = 1000;
+    }
+};
+
+b()
+console.log(a);  // 10
+</code></pre>
+        </section>
+        <section >
+            <h2 id="hoisting-smalla-horrible-feature-of-jssmall">Hoisting <small>(a horrible feature of JS)</small></h2>
+<p>Function declarations and variable declarations (not assignments) are <strong>hoisted magically to the top</strong> of the containing scope.</p>
+
+<pre><code class="language-javascript">function golden() {
+    bears();
+    var x = 1;
+};
+</code></pre>
+
+<p>Is really ..</p>
+
+<pre><code class="language-javascript">function golden() {
+    var x;  // declarations are hoisted
+    bears();
+    x = 1;
+};
+</code></pre>
+        </section>
+        <section >
+            <h3 id="whats-entered-into-the-js-interpreter">What’s entered into the JS interpreter:</h3>
+
+<pre><code class="language-javascript">var a = 10;
+
+function b() {
+    a = 100;
+    if (true) {
+        return;
+    } else {
+        var a = 1000;
+    }
+};
+
+b()
+</code></pre>
+        </section>
+        <section >
+            <h3 id="whats-actually-interpretted">What’s actually interpretted:</h3>
+
+<pre><code class="language-javascript">var a = 10;
+
+function b() {
+    var a;
+    // assignment to locally scoped `a`
+    a = 100;
+    if (true) {
+        return;
+    } else {
+        // Declaration hoisted, but not assignment
+        a = 1000;
+    }
+};
+
+b()
+// `a` out here is unmodified and still 10
+</code></pre>
+        </section>
+        <section >
+            <h3 id="be-careful-when-declaring-functions-and-variables">Be careful when declaring functions and variables.</h3>
+        </section>
+        <section >
+            <h3 id="javascripts-syntax-is-forgiving-but-it-doesnt-mean-you-should-code-carelessly">JavaScript’s syntax is forgiving, but it doesn’t mean you should code carelessly.</h3>
+        </section>
+        <section >
+            <h1 id="sources">Sources</h1>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">MDN: JavaScript Documentation</a></li>
+  <li><a href="http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742">JavaScript: The Good Parts</a></li>
+  <li><a href="http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html">JavaScript Scoping and Hoisting</a></li>
+  <li><a href="http://matt.might.net/articles/javascript-warts/">Avoiding and exploiting JavaScript’s warts</a></li>
+  <li><a href="http://www.quirksmode.org/js/contents.html">Introduction to JavaScript</a></li>
+</ul>
+        </section>
+    </article>
+
+    <!-- Stylesheets -->
+    <link media="all" rel="stylesheet" type="text/css"
+          href="stylesheets/main.css" />
+
+    <!-- Javascripts -->
+    <script type="text/javascript" src="javascripts/main.js"></script>
+    <script>hyhyhy.from('#presentation', { bullets: "ol li, .bullet", hash: true, keys: true, fullscreen: true, progress: true, scale: true, state: true, touch: true });</script>
+</body>
+</html>
