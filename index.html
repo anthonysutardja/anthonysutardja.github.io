@@ -1,9 +1,9 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="description" content="I'm a student at UC Berkeley. This is a home for my stuff.">
+  <meta name="description"
+        content="I'm a thinker &amp; explorer. Co-founder at Dray, UC Berkeley alumnus, and coffee addict.">
   <meta name="author" content="Anthony Sutardja">
   <meta name="viewport" content="width=device-width">
   <title>Anthony Sutardja's Abode</title>
@@ -42,11 +42,11 @@
     };
     // Data Entries
     var iconData = [
-      {letter:"g", color:"#305d8a", url:"http://github.com/anthonysutardja"},
       {letter:"i", color:"#0073b2", url:"http://www.linkedin.com/in/anthonysutardja"},
-      {letter:"o", color:"#2c4762", url:"http://bl.anthonysutardja.com/"},
       {letter:"f", color:"#3b5998", url:"http://www.facebook.com/anthonysutardja"},
-      {letter:"l", color:"#00a5d8", url:"http://twitter.com/anthonysutardja"} 
+      {letter:"g", color:"#305d8a", url:"http://github.com/anthonysutardja"},
+      {letter:"l", color:"#00a5d8", url:"http://twitter.com/anthonysutardja"},
+      {letter:"r", color:"#cf4647", url:"http://anthonys.svbtle.com/"} 
     ];
     
     // After load ...
@@ -74,9 +74,8 @@
           .attr('y', '125px')
           .attr('text-anchor', 'middle')
           .attr('id', 'info')
-          .text("Check out my blog.")
+          .text("When the sun comes up, you better start running.")
           .attr('opacity', 0)
-          .on('click', function(){ window.location = "http://anthonys.svbtle.com/";})
           .transition().ease('bounce').duration(1000)
             .attr('transform', function(){return 'translate(0, 25)';})
             .attr('opacity', .45);
