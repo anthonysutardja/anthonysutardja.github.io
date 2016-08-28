@@ -13,6 +13,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/css/normalize.css" type="text/css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="/assets/monosocial/monosocialiconsfont.css" type="text/css" media="screen" charset="utf-8">
   
 </head>
 <body>
@@ -42,11 +43,13 @@
     };
     // Data Entries
     var iconData = [
-      {letter:"i", color:"#0073b2", url:"http://www.linkedin.com/in/anthonysutardja"},
-      {letter:"f", color:"#3b5998", url:"http://www.facebook.com/anthonysutardja"},
-      {letter:"g", color:"#305d8a", url:"http://github.com/anthonysutardja"},
-      {letter:"l", color:"#00a5d8", url:"http://twitter.com/anthonysutardja"},
-      {letter:"r", color:"#cf4647", url:"http://anthonys.svbtle.com/"} 
+      {letter:"circlelinkedin", color:"#0073b2", url:"http://www.linkedin.com/in/anthonysutardja"},
+      {letter:"circlefacebook", color:"#3b5998", url:"http://www.facebook.com/anthonysutardja"},
+      {letter:"circlegithubalt", color:"#305d8a", url:"http://github.com/anthonysutardja"},
+      {letter:"circletwitterbird", color:"#00a5d8", url:"http://twitter.com/anthonysutardja"},
+      {letter:"circleinstagram", color:"#fccc63", url:"https://www.instagram.com/anthonyyrs/"},
+      {letter:"circleyelp", color:"#c41200", url:"https://www.yelp.com/user_details_bookmarks?userid=txh1biBqjsaGqgYEyqUEZw"},
+      {letter:"circlerss", color:"#2570C1", url:"http://anthonys.svbtle.com/"} 
     ];
     
     // After load ...
@@ -71,7 +74,7 @@
       // Subline
       var link = canv.append("text")
           .attr('x', '250px')
-          .attr('y', '125px')
+          .attr('y', '140px')
           .attr('text-anchor', 'middle')
           .attr('id', 'info')
           .text("When the sun comes up, you better start running.")
@@ -87,8 +90,9 @@
           .attr('x', '250px')
           .attr('y', '125px')
           .attr('text-anchor', 'middle')
-          .attr('class', 'white')
-          .style('font-family', 'Socialico')
+          .attr('class', 'white symbol')
+          .attr('title', 'circlebirdtwitter')
+          .style('font-family', 'Mono Social Icons Font')
           .style('font-size', '38px')
           .attr('id', 'icons')
           .text(function(d){return d.letter;})
@@ -96,7 +100,7 @@
           .on("mouseover", Icons.changeBG)
           .on("mouseout", Icons.resetBG)
           .transition()
-            .attr('transform', function(d,i){return 'translate('+(i-2)*50+',0)';})
+            .attr('transform', function(d,i){return 'translate('+(i - Math.floor(iconData.length / 2))*50+',0)';})
             .ease('elastic')
             .duration(2250);
       

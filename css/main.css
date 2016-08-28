@@ -62,7 +62,7 @@ body{
   font-family: "Open Sans", "Helvetica", sans-serif;
   font-size: 12px;
   font-weight: 700;
-  cursor: pointer;
+  // cursor: pointer;
   shape-rendering: crispEdges;
 }
 
