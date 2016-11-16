@@ -1,0 +1,12 @@
+.left-section {
+    background-color: #cf4647;
+}
+
+body, h1, h2, h3, h4, h5, p {
+    font-family: 'Patua One', serif;
+}
+
+a.sm-icon {
+    font-family: 'Mono Social Icons Font';
+    font-size: 28px;
+}

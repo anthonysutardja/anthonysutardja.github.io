@@ -1,111 +1,57 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="description"
-        content="I'm a thinker &amp; explorer. Co-founder at Dray, UC Berkeley alumnus, and coffee addict.">
-  <meta name="author" content="Anthony Sutardja">
-  <meta name="viewport" content="width=device-width">
-  <title>Anthony Sutardja's Abode</title>
-  <!-- External font -->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  
-  <!-- Styles -->
-  <link rel="stylesheet" href="/css/normalize.css" type="text/css" media="screen" charset="utf-8">
-  <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" charset="utf-8">
-  <link rel="stylesheet" href="/assets/monosocial/monosocialiconsfont.css" type="text/css" media="screen" charset="utf-8">
-  
-</head>
-<body>
-  <!-- Main content here -->
-  <div id="parent">
-    <div id="child"></div>
-  </div>
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthony's Abode</title>
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow:700|Patua+One" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/monosocial/monosocialiconsfont.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div  style="max-width: 500px; margin: 35px auto;">
 
-  <!-- JavaScript files -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" charset="utf-8">
-    $("#parent").height($(window).height());
-    //need event handler for window height resize
-    Icons = {
-      'forward' : function(d){
-        window.location = d.url;
-      },
-      'changeBG' : function(d){
-        d3.select("body").transition()
-          .style("background-color", d.color);
-      },
-      'resetBG' : function(d){
-        d3.select("body").transition()
-          .style("background-color", "#f57c21");
-      }
-    };
-    // Data Entries
-    var iconData = [
-      {letter:"circlelinkedin", color:"#0073b2", url:"http://www.linkedin.com/in/anthonysutardja"},
-      {letter:"circlefacebook", color:"#3b5998", url:"http://www.facebook.com/anthonysutardja"},
-      {letter:"circlegithubalt", color:"#305d8a", url:"http://github.com/anthonysutardja"},
-      {letter:"circletwitterbird", color:"#00a5d8", url:"http://twitter.com/anthonysutardja"},
-      {letter:"circleinstagram", color:"#fccc63", url:"https://www.instagram.com/anthonyyrs/"},
-      {letter:"circleyelp", color:"#c41200", url:"https://www.yelp.com/user_details_bookmarks?userid=txh1biBqjsaGqgYEyqUEZw"},
-      {letter:"circlerss", color:"#2570C1", url:"http://anthonys.svbtle.com/"} 
-    ];
-    
-    // After load ...
-    $(document).ready(function(){
-      // Render vis
-      var canv = d3.select("#child").append("svg:svg")
-          .attr("width", "500px")
-          .attr("height", "250px")
-          .attr("id", "canv");
-      
-      // Intro text
-      var intro = canv.append("text")
-          .attr('x', '250px')
-          .attr('y', '75px')
-          .attr('text-anchor', 'middle')
-          .attr('class', 'white')
-          .style('font-size', '28px')
-          .style('font-weight', '700')
-          .style('font-family', 'Open Sans')
-          .text("Hi, I'm Anthony.");
-          
-      // Subline
-      var link = canv.append("text")
-          .attr('x', '250px')
-          .attr('y', '140px')
-          .attr('text-anchor', 'middle')
-          .attr('id', 'info')
-          .text("When the sun comes up, you better start running.")
-          .attr('opacity', 0)
-          .transition().ease('bounce').duration(1000)
-            .attr('transform', function(){return 'translate(0, 25)';})
-            .attr('opacity', .45);
-      
-      // Icons
-      var icons = canv.selectAll('#icons').data(iconData);
-      
-      icons.enter().append("text")
-          .attr('x', '250px')
-          .attr('y', '125px')
-          .attr('text-anchor', 'middle')
-          .attr('class', 'white symbol')
-          .attr('title', 'circlebirdtwitter')
-          .style('font-family', 'Mono Social Icons Font')
-          .style('font-size', '38px')
-          .attr('id', 'icons')
-          .text(function(d){return d.letter;})
-          .on("click", Icons.forward)
-          .on("mouseover", Icons.changeBG)
-          .on("mouseout", Icons.resetBG)
-          .transition()
-            .attr('transform', function(d,i){return 'translate('+(i - Math.floor(iconData.length / 2))*50+',0)';})
-            .ease('elastic')
-            .duration(2250);
-      
-      
-    });
-  </script>
-</body>
+    <div class="row">
+      <div class="columns small-12">
+        <h1>Hi, I'm Anthony.</h1>
+        <p>I'm currently building a <a href="https://parade.ai" target="_blank">startup</a> that applies connectivity, big data, and AI into the trucking industry. I like solving problems with large market impact. Let's <a href="mailto:anthony@sutardja.com" target="_blank">talk</a>.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+          <a class="sm-icon" 
+          style="color: #0073b2;"
+          href="http://www.linkedin.com/in/anthonysutardja">circlelinkedin</a>
+          <a class="sm-icon"
+          style="color: #3b5998;"
+           href="http://www.facebook.com/anthonysutardja">circlefacebook</a>
+          <a class="sm-icon" 
+          style="color: #00a5d8;"
+          href="http://twitter.com/anthonysutardja">circletwitterbird</a>
+          <a class="sm-icon" 
+          style="color: #00a5d8;"
+          href="http://github.com.com/anthonysutardja">circlegithubalt</a>
+
+          <a class="sm-icon" 
+          style="color: #bc2a8d;"
+          href="http://www.instagram.com/anthonysutardja">circleinstagram</a>
+          <a class="sm-icon" 
+          style="color: #c41200;"
+          href="https://www.yelp.com/user_details_bookmarks?userid=txh1biBqjsaGqgYEyqUEZw">circleyelp</a>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:25px;">
+      <div class="column">
+        <p><a href="https://anthonys.svbtle.com" target="_blank">Check out my blog &rarr;</a></p>
+      </div>
+    </div>
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>
